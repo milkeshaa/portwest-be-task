@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('skus', function (Blueprint $table) {
             $table->string('id', 36)->primary();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
