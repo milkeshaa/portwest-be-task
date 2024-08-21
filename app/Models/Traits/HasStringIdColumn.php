@@ -8,9 +8,6 @@ use Illuminate\Support\Str;
 
 trait HasStringIdColumn 
 {
-    protected string $keyType = 'string';
-    public bool $incrementing = false;
-
     protected static function boot()
     {
         parent::boot();

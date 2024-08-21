@@ -15,6 +15,7 @@ use Illuminate\Support\Collection;
 /**
  * @param string $id
  * @param string $name
+ * @param string $category_id
  * @param ?string $description
  * 
  * @param Category $category
@@ -25,10 +26,8 @@ class Product extends Model
     use HasFactory;
     use HasStringIdColumn;
 
-    protected $fillable = [
-        'name',
-        'description',
-    ];
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public function category(): BelongsTo
     {

@@ -8,7 +8,6 @@ use App\Models\Traits\HasStringIdColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @param string $id
@@ -18,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @param float $height
  * @param float $length
  * @param string $name
+ * @param ?string $upcoming_update_date
  * 
  * @param Product $product
  * @param Sku $sku
@@ -28,14 +28,9 @@ class ProductVariant extends Model
 {
     use HasFactory;
     use HasStringIdColumn;
-
-    protected $fillable = [
-        'on_sale',
-        'box_qty',
-        'width',
-        'height',
-        'length',
-    ];
+    
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public function product(): BelongsTo
     {
@@ -47,14 +42,14 @@ class ProductVariant extends Model
         return $this->belongsTo(Sku::class);
     }
 
-    public function size(): HasOne
+    public function size(): BelongsTo
     {
-        return $this->hasOne(Size::class);
+        return $this->belongsTo(Size::class);
     }
 
-    public function colour(): HasOne
+    public function colour(): BelongsTo
     {
-        return $this->hasOne(Colour::class);
+        return $this->belongsTo(Colour::class);
     }
 
     public function getNameAttribute(): string
