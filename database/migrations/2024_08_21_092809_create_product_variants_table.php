@@ -24,6 +24,7 @@ return new class extends Migration
             $table->float('width');
             $table->float('height');
             $table->float('length');
+            $table->string('upcoming_update_date', 10)->nullable();
             $table->timestamps();
         });
     }
