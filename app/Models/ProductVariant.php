@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Traits\HasStringIdColumn;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -55,5 +56,10 @@ class ProductVariant extends Model
     public function getNameAttribute(): string
     {
         return sprintf('%s%s%s', $this->sku->name, $this->size->name, $this->colour->name);
+    }
+
+    public function scopeIsAvailable(Builder $query): Builder
+    {
+        return $query->where('on_sale', '=', true);
     }
 }
